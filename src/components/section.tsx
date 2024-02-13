@@ -5,7 +5,7 @@ type Props = {
 }
 
 const Section = ({ children, disabled, loading }: Props) => (
-  <section className={loading ? "pointer-events-none" : ""}>
+  <section className={loading ? "" : ""}>
     {children}
     <style jsx>{`
       section {
