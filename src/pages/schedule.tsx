@@ -21,7 +21,7 @@ const SchedulePage = () => {
 
   const [showPassedCourses, setPassedCoursesVisibility] = useState(false);
 
-  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_ECRANS_CONNECTES_URL || 'https://chirpchat2.alwaysdata.net/wp-json/amu-ecran-connectee'}/v1/schedule/${code}`, fetcher)
+  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_ECRANS_CONNECTES_URL || 'https://testserveur.alwaysdata.net/wp-json/amu-ecran-connectee'}/v1/schedule/${code}`, fetcher)
 
   useEffect(() => {
     if (!data || !data.data || error) return;
