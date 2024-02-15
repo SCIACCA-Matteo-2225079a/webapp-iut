@@ -20,7 +20,7 @@ const Settings = () => {
     const [notifications, setNotifications] = useState(false)
     const [groupFilter, setGroupFilter] = useState(true)
 
-    const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_ECRANS_CONNECTES_URL || 'https://testserveur.alwaysdata.net/wp-json/amu-ecran-connectee'}/v1/ade`, fetcher)
+    const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_ECRANS_CONNECTES_URL || 'https://iut-ptut.alwaysdata.net/wp-json/amu-ecran-connectee'}/v1/ade`, fetcher)
 
     const onCodeChange = (code: any) => {
         console.log('ADE code changed to', code)
