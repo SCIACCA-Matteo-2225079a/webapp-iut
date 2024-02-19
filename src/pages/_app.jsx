@@ -32,10 +32,10 @@ const App = ({ Component, pageProps }) => {
         <link rel='icon' type='image/png' href='/favicon.png' />
         <link rel='manifest' href='/manifest.json' />
 
-				<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+				<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" async=""></script>
 				<script>
-					window.OneSignalDeferred = window.OneSignalDeferred || [];
-					OneSignalDeferred.push(function(OneSignal) {
+					window.OneSignal = window.OneSignal || [];
+					OneSignal.push(function() {
 					OneSignal.init({
 						appId: "0a2f9a03-ae7e-4744-9901-09a0ac1f12f2",
 						safari_web_id: "web.onesignal.auto.0a17e090-f65a-43cf-871a-056959ed633a",
@@ -45,7 +45,7 @@ const App = ({ Component, pageProps }) => {
 					})
 				});
 				</script>
-      </Head>
+			</Head>
 
       <Component {...pageProps} />
     </OnlineStatusProvider>
