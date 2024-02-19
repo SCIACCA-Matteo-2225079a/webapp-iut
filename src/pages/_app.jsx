@@ -42,7 +42,7 @@ const App = ({ Component, pageProps }) => {
 						notifyButton: {
 							enable: true,
 						},
-					});
+					})
 				});
 				</script>
       </Head>
