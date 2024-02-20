@@ -35,15 +35,15 @@ const App = ({ Component, pageProps }) => {
 				<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" async=""></script>
 				<script>
 					window.OneSignal = window.OneSignal || [];
-					OneSignal.push(function() {
-					OneSignal.init({
-						appId: "0a2f9a03-ae7e-4744-9901-09a0ac1f12f2",
-						safari_web_id: "web.onesignal.auto.0a17e090-f65a-43cf-871a-056959ed633a",
-						notifyButton: {
-							enable: true,
-						},
-					})
-				});
+					window.OneSignal.push(function() {
+						window.OneSignal.init({
+							appId: "0a2f9a03-ae7e-4744-9901-09a0ac1f12f2",
+							safari_web_id: "web.onesignal.auto.0a17e090-f65a-43cf-871a-056959ed633a",
+							notifyButton: {
+								enable: true,
+							},
+						})
+					});
 				</script>
 			</Head>
 
