@@ -1,45 +1,50 @@
-import Brand from './brand'
-import { useEffect } from 'react'
-import { useOnlineStatus } from '../utils/online'
-import { Wifi, WifiOff, Moon, Sun } from 'react-feather'
-import useLocalStorage from '../utils/localStorage'
+import { useEffect, useCallback } from 'react';
+import { Wifi, WifiOff, Moon, Sun } from 'react-feather';
+import Brand from './brand';
+import { useOnlineStatus } from '../utils/online';
+import useLocalStorage from '../utils/localStorage';
 
 const Header = () => {
-  const isOnline = useOnlineStatus()
-  const [mode, setMode] = useLocalStorage('dark-mode', 'autodetect');
+	const isOnline = useOnlineStatus();
+	const [mode, setMode] = useLocalStorage('dark-mode', 'autodetect');
 
-  const onSelectMode = (mode: string) => {
-    setMode(mode)
-    if (mode === 'dark') document.documentElement.classList.add('dark')
-    else document.documentElement.classList.remove('dark')
-  }
+	const onSelectMode = useCallback((selectedMode: string) => {
+		setMode(selectedMode);
+		if (selectedMode === 'dark') document.documentElement.classList.add('dark');
+		else document.documentElement.classList.remove('dark');
+	}, [setMode]);
 
-  useEffect(() => {
-    // Add listener to update styles
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => onSelectMode(e.matches ? 'dark' : 'light'));
+	useEffect(() => {
+		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+		const listener = (e) => onSelectMode(e.matches ? 'dark' : 'light');
 
-    // Setup dark/light mode for the first time
-    if (mode === 'autodetect')
-      onSelectMode(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-    else onSelectMode(mode)
+		// Add listener to update styles
+		mediaQuery.addEventListener('change', listener);
 
-    // Remove listener
-    return () => {
-      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', () => {})
-    }
-  }, [])
+		// Setup dark/light mode for the first time
+		if (mode === 'autodetect') onSelectMode(mediaQuery.matches ? 'dark' : 'light');
+		else onSelectMode(mode);
 
-  return (
-    <header className="bg-white border-b-2 border-gray-100 dark:border-opacity-25 dark:bg-purple-500">
-      <Brand />
+		// Remove listener
+		return () => {
+			mediaQuery.removeEventListener('change', listener);
+		};
+	}, [mode, onSelectMode]);
 
-      <div style={{ flex: 1 }} />
-
-      <nav>
-        {isOnline ? <Wifi /> : <WifiOff />}
-        <div className='divider' />
-        {mode === 'dark' ? <Moon className="transition-all cursor-pointer hover:opacity-50" onClick={() => onSelectMode('light')} /> : <Sun className="transition-all cursor-pointer hover:opacity-50" onClick={() => onSelectMode('dark')} />}      </nav>
-      <style jsx global>{`
+	return (
+		<header className="bg-white border-b-2 border-gray-100 dark:border-opacity-25 dark:bg-purple-500">
+			<Brand />
+			<div style={{ flex: 1 }} />
+			<nav>
+				{isOnline ? <Wifi /> : <WifiOff />}
+				<div className="divider" />
+				{mode === 'dark' ? (
+					<Moon className="transition-all cursor-pointer hover:opacity-50" onClick={() => onSelectMode('light')} />
+				) : (
+					<Sun className="transition-all cursor-pointer hover:opacity-50" onClick={() => onSelectMode('dark')} />
+				)}
+			</nav>
+			<style>{`
         header {
           padding: 0 var(--gap);
           padding-top: env(safe-area-inset-top);
@@ -69,8 +74,8 @@ const Header = () => {
           transition: var(--transition-colors);
         }
       `}</style>
-    </header>
-  )
-}
+		</header>
+	);
+};
 
-export default Header
+export default Header;
