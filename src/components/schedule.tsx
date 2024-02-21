@@ -27,8 +27,8 @@ function process(course: any) {
 
         return course;
     }
-    
-    let obj = {
+
+    const obj = {
         label: course.summary.replace(/[M|R](.*?) /, ''),
         module: new RegExp(/([M|R].*?) /, "g").exec(course.summary)?.[1],
         description: course.description,
@@ -39,7 +39,7 @@ function process(course: any) {
     };
 
     obj.ongoing = obj.start.getTime() < Date.now() && obj.end.getTime() > Date.now();
-    
+
     return obj;
 }
 
@@ -49,22 +49,22 @@ const Schedule = ({ data } : Props) => {
             .filter((x: { end: Date }) => x.end?.getTime() > new Date().getTime())
             .sort((a: { start: Date }, b: { start: Date }) => a.start?.getTime() - b.start?.getTime())
 
-    let dataSortedByDate = {};
+    const dataSortedByDate = {};
     data.forEach(course => {
-        let date = course.start.toLocaleDateString(navigator.language, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        const date = course.start.toLocaleDateString(navigator.language, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         if (!dataSortedByDate[date]) {
             dataSortedByDate[date] = [];
         }
         dataSortedByDate[date].push(course);
     });
-    
+
     return <>
         {Object.entries(dataSortedByDate).map(([date, courses]: [string, Array<any>], i) => (<div key={i}>
                 <div className="p-6 overflow-hidden rounded-xl bg-gradient-to-r from-yellow-50 to-yellow-100 sm:p-10">
                     <p className="text-xl not-italic text-center text-yellow-800 sm:text-3xl">{date}</p>
                 </div>
             {courses.sort((a: { start: Date }, b: { start: Date }) => b.start?.getTime() - a.start?.getTime()).reverse().map((course, j) =>
-                    <div className="py-6" key={i + '-' + j}>
+                    <div className="py-6" key={`${i  }-${  j}`}>
                     <div className={`p-4 shadow-xl sm:p-6 dark:bg-purple-700 rounded-xl ${course.ongoing ? 'bg-green-200' : ''}`}>
                             <div className="flex flex-row justify-between align-center">
                                 <div className="flex flex-col">
@@ -83,7 +83,7 @@ const Schedule = ({ data } : Props) => {
                             <div className="flex flex-col items-center justify-center">
 
                                 <div className="relative w-full h-32 p-4 mt-4 bg-center bg-cover rounded-lg shadow-xl bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-gold-200 dark:to-gold-300">
-                                    <div className="absolute inset-0 bg-opacity-50 rounded-lg backdrop-filter backdrop-blur-md"></div>
+                                    <div className="absolute inset-0 bg-opacity-50 rounded-lg backdrop-filter backdrop-blur-md" />
                                     <div className="relative flex items-center justify-center w-full h-full px-4 sm:px-6 lg:px-4">
                                         <div>
                                             <h3 className="text-lg text-center text-gray-700">
