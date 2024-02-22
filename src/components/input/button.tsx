@@ -11,19 +11,29 @@ type Props = {
 	icon?: React.ReactNode
 }
 
-const Brand = ({ children, onClick, href, icon, disabled = false, type }: Props) => (
-	<button
-		type={type}
-		disabled={disabled}
-		onClick={onClick || (href ? () => router.push('/settings') : undefined)}
-		className="flex px-4 py-2 my-4 font-semibold text-white bg-blue-500 rounded-lg shadow-md justify-evenly hover:bg-blue-700 dark:bg-gold-500 dark:hover:bg-gold-700 focus:outline-none disabled:opacity-50"
-	>
-		<div className="mr-2">
-			{icon ? icon : <Package />}
-		</div>
-		{children}
-	</button>
-)
+const Brand = ({ children, onClick, href, icon, disabled = false, type }: Props) => {
+	const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		if (onClick) {
+			onClick(event);
+		} else if (href) {
+			void router.push(href);
+		}
+	};
+
+	return (
+		<button
+			type={type}
+			disabled={disabled}
+			onClick={handleClick}
+			className="flex px-4 py-2 my-4 font-semibold text-white bg-blue-500 rounded-lg shadow-md justify-evenly hover:bg-blue-700 dark:bg-gold-500 dark:hover:bg-gold-700 focus:outline-none disabled:opacity-50"
+		>
+			<div className="mr-2">
+				{icon ? icon : <Package />}
+			</div>
+			{children}
+		</button>
+	);
+};
 
 Brand.defaultProps = {
 	disabled: false,
