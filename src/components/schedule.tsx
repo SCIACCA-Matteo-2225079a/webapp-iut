@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 type Props = {
     data: Array<any>
 }
@@ -19,13 +21,14 @@ type SavedCourseProps = {
 }
 
 function process(course: any) {
-    if (!course.dtstart) {
-        if (course.start)
-            course.start = new Date(course.start);
-        if (course.end)
-            course.end = new Date(course.end);
+	const procCourse = course;
+    if (!procCourse.dtstart) {
+        if (procCourse.start)
+					procCourse.start = new Date(procCourse.start);
+        if (procCourse.end)
+					procCourse.end = new Date(procCourse.end);
 
-        return course;
+        return procCourse;
     }
 
     const obj = {
@@ -44,8 +47,11 @@ function process(course: any) {
 }
 
 const Schedule = ({ data } : Props) => {
-    Object.keys(data).forEach(key => data[key] = process(data[key]));
-    data = data
+		let scheduleData = data;
+	Object.keys(scheduleData).forEach(function loop(key) {
+		scheduleData[key] = process(data[key]);
+	});
+	scheduleData = scheduleData
             .filter((x: { end: Date }) => x.end?.getTime() > new Date().getTime())
             .sort((a: { start: Date }, b: { start: Date }) => a.start?.getTime() - b.start?.getTime())
 
@@ -59,12 +65,12 @@ const Schedule = ({ data } : Props) => {
     });
 
     return <>
-        {Object.entries(dataSortedByDate).map(([date, courses]: [string, Array<any>], i) => (<div key={i}>
+        {Object.entries(dataSortedByDate).map(([date, courses]: [string, Array<any>]) => (<div key={date}>
                 <div className="p-6 overflow-hidden rounded-xl bg-gradient-to-r from-yellow-50 to-yellow-100 sm:p-10">
                     <p className="text-xl not-italic text-center text-yellow-800 sm:text-3xl">{date}</p>
                 </div>
-            {courses.sort((a: { start: Date }, b: { start: Date }) => b.start?.getTime() - a.start?.getTime()).reverse().map((course, j) =>
-                    <div className="py-6" key={`${i  }-${  j}`}>
+            {courses.sort((a: { start: Date }, b: { start: Date }) => b.start?.getTime() - a.start?.getTime()).reverse().map((course) =>
+								<div className="py-6" key={`${uuidv4()}`}>
                     <div className={`p-4 shadow-xl sm:p-6 dark:bg-purple-700 rounded-xl ${course.ongoing ? 'bg-green-200' : ''}`}>
                             <div className="flex flex-row justify-between align-center">
                                 <div className="flex flex-col">

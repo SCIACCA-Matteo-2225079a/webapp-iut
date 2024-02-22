@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "license": "MIT",
   "description": "Accédez à votre emploi du temps en ligne",
-  "authors": [{
-    "name": "Thomas Cardon",
-    "email": "thomas.cardon@pm.me"
-  }],
+  "authors": [
+    {
+      "name": "Thomas Cardon",
+      "email": "thomas.cardon@pm.me"
+    }
+  ],
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -29,7 +31,9 @@
     "react-feather": "^2.0.9",
     "sharp": "^0.29.3",
     "swr": "^1.0.1",
-    "tailwindcss": "^2.2.19"
+    "tailwindcss": "^2.2.19",
+    "uuid": "^9.0.1",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^12.0.4",
