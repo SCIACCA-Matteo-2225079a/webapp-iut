@@ -38,7 +38,7 @@ const Brand = ({ children, onClick, href, icon, disabled = false, type }: Props)
 Brand.defaultProps = {
 	disabled: false,
 	onClick: undefined,
-	type: "button", // Valeur par défaut ajoutée ici
+	type: "button",
 	href: undefined,
 	icon: undefined
 };
