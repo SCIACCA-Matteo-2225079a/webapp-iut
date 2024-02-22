@@ -1,8 +1,7 @@
+import { Settings } from 'react-feather'
 import Page from '../components/page'
 import Section from '../components/section'
 import Button from '../components/input/button'
-
-import { Settings } from 'react-feather'
 
 export default () => {
 
