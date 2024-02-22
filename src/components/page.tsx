@@ -1,11 +1,14 @@
 import Head from 'next/head'
+import React from 'react'
 import Appbar from './appbar'
 import BottomNav from './bottom-nav'
 import Title from './title'
 
 type Props = {
   title?: string,
+	// eslint-disable-next-line react/require-default-props
   subtitle?: React.ReactNode,
+	// eslint-disable-next-line react/require-default-props
   showButtons?: boolean,
   children: React.ReactNode
 }
@@ -25,7 +28,7 @@ const Page = ({ title, showButtons, subtitle, children }: Props) => {
 
     <BottomNav />
 
-    <style jsx>{`
+    <style>{`
       main {
         margin: 0 auto;
         padding-top: calc(env(safe-area-inset-top) + 73px);
