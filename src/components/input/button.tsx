@@ -16,7 +16,7 @@ const Brand = ({ children, onClick, href, icon, disabled = false, type }: Props)
 		if (onClick) {
 			onClick(event);
 		} else if (href) {
-			void router.push(href);
+			router.push(href);
 		}
 	};
 
