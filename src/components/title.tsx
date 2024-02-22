@@ -1,7 +1,7 @@
 import { isMobile } from 'react-device-detect';
 
-import Section from './section'
 import { Share, Edit2 } from 'react-feather'
+import Section from './section'
 
 type Props = {
   showButtons: boolean,
@@ -15,7 +15,7 @@ const Title = ({ showButtons, subtitle, children }) => {
       navigator.share({
         title: 'Département info',
         text: 'Emploi du temps',
-        url: location.href,
+        url: window.location.href,
       });
     }
   }
@@ -32,7 +32,7 @@ const Title = ({ showButtons, subtitle, children }) => {
         {showButtons && (
           <div className="flex mt-5 lg:mt-0 lg:ml-4">
             <span className="hidden sm:block">
-              <button disabled={true} type="button" className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <button disabled type="button" className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <Edit2 />&nbsp;
                 Modifier
               </button>
