@@ -6,7 +6,7 @@ type Props = {
 	children: React.ReactNode,
 	disabled?: boolean,
 	onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-	type?: "button" | "submit" | "reset", 
+	type?: "button" | "submit" | "reset",
 	href?: string,
 	icon?: React.ReactNode
 }
@@ -38,6 +38,7 @@ const Brand = ({ children, onClick, href, icon, disabled = false, type }: Props)
 Brand.defaultProps = {
 	disabled: false,
 	onClick: undefined,
+	type: "button", // Valeur par défaut ajoutée ici
 	href: undefined,
 	icon: undefined
 };
