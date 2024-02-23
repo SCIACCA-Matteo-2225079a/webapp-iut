@@ -1,8 +1,9 @@
 import { useEffect, useCallback } from 'react';
 import { Wifi, WifiOff, Moon, Sun } from 'react-feather';
 import Brand from './brand';
-import { useOnlineStatus } from '../utils/online';
 import useLocalStorage from '../utils/localStorage';
+
+import { useOnlineStatus } from '../utils/online';
 
 const Header = () => {
 	const isOnline = useOnlineStatus();
