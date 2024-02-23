@@ -4,14 +4,13 @@ import { Package } from "react-feather";
 
 type Props = {
 	children: React.ReactNode,
-	disabled?: boolean,
 	onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 	type?: "button" | "submit" | "reset",
 	href?: string,
 	icon?: React.ReactNode
 }
 
-const Brand = ({ children, onClick, href, icon, disabled = false, type }: Props) => {
+const Brand = ({ children, onClick, href, icon, type }: Props) => {
 	const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 		if (onClick) {
 			onClick(event);
@@ -20,10 +19,10 @@ const Brand = ({ children, onClick, href, icon, disabled = false, type }: Props)
 		}
 	};
 
+	/* eslint-disable react/button-has-type */
 	return (
 		<button
-			type={type}
-			disabled={disabled}
+			type={type || "button"}
 			onClick={handleClick}
 			className="flex px-4 py-2 my-4 font-semibold text-white bg-blue-500 rounded-lg shadow-md justify-evenly hover:bg-blue-700 dark:bg-gold-500 dark:hover:bg-gold-700 focus:outline-none disabled:opacity-50"
 		>
@@ -33,10 +32,10 @@ const Brand = ({ children, onClick, href, icon, disabled = false, type }: Props)
 			{children}
 		</button>
 	);
+	/* eslint-enable react/button-has-type */
 };
 
 Brand.defaultProps = {
-	disabled: false,
 	onClick: undefined,
 	type: "button",
 	href: undefined,
@@ -44,3 +43,4 @@ Brand.defaultProps = {
 };
 
 export default Brand;
+
