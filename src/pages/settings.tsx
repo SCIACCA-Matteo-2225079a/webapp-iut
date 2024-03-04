@@ -22,18 +22,12 @@ const Settings = () => {
 
     const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_ECRANS_CONNECTES_URL || 'https://iut-ptut.alwaysdata.net/wp-json/amu-ecran-connectee'}/v1/ade`, fetcher)
 
-    const onCodeChange = (newCode: any) => {
-			console.log('Raw ADE code value:', newCode); // Ajout pour débogage
-			const codeAsNumber = parseInt(newCode, 10);
-			console.log('ADE code changed to', codeAsNumber); // Modifié pour afficher la valeur convertie
+	const onCodeChange = (newCode: number) => {
+		console.log('ADE code changed to', newCode)
+		localStorage.removeItem('schedule.data')
+		setCode(newCode)
+	}
 
-			if (!Number.isNaN(codeAsNumber)) {
-				localStorage.removeItem('schedule.data');
-				setCode(codeAsNumber);
-			} else {
-				console.error('Failed to convert ADE code to number:', newCode);
-			}
-    }
 
 	return (
 		<Page title='Paramètres' subtitle={<p className="text-sm dark:text-gray-200">Ces paramètres seront enregistrés sur votre appareil.</p>}>
