@@ -19,7 +19,7 @@ const SchedulePage = () => {
   const [code] = useLocalStorage("schedule.adeCode", 8379);
   const [scheduleData, setScheduleData] = useLocalStorage("schedule.data", []);
 
-  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_ECRANS_CONNECTES_URL || 'https://iut-ptut.alwaysdata.net/wp-json/amu-ecran-connectee'}/v1/schedule/${code}`, fetcher)
+  const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_ECRANS_CONNECTES_URL || 'https://chirpchat2.alwaysdata.net/wp-json/amu-ecran-connectee'}/v1/schedule/${code}`, fetcher)
 
   useEffect(() => {
     if (!data || !data.data || error) return;

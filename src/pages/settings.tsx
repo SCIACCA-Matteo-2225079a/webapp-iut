@@ -20,7 +20,7 @@ const Settings = () => {
     const [notifications, setNotifications] = useState(false)
     const [groupFilter, setGroupFilter] = useState(true)
 
-    const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_ECRANS_CONNECTES_URL || 'https://iut-ptut.alwaysdata.net/wp-json/amu-ecran-connectee'}/v1/ade`, fetcher)
+    const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_ECRANS_CONNECTES_URL || 'https://chirpchat2.alwaysdata.net/wp-json/amu-ecran-connectee'}/v1/ade`, fetcher)
 
     const onCodeChange = (newCode: any) => {
 			console.log('Raw ADE code value:', newCode); // Ajout pour débogage
