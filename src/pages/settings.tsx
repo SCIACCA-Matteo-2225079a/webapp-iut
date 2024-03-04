@@ -63,7 +63,7 @@ const Settings = () => {
                         {data && (<>
                             <select onChange={e => onCodeChange(e.target.value)} className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none dark:text-gray-100 dark:bg-purple-700 dark:border-transparent focus:outline-none focus:ring focus:border-blue-300" placeholder="Emploi du temps à sélectionner" defaultValue={code}>
 															{Array.isArray(data) && data.filter(({ type }) => groupFilter === true || type === groupFilter)
-																.map(({ newCode, titles }) => <option key={newCode} value={newCode}>{titles}</option>)}
+																.map(({ newCode, title }) => <option key={newCode} value={newCode}>{title}</option>)}
 														</select>
                             <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
                                 <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
