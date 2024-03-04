@@ -27,7 +27,7 @@ const Settings = () => {
 			const codeAsNumber = parseInt(newCode, 10);
 			console.log('ADE code changed to', codeAsNumber); // Modifié pour afficher la valeur convertie
 
-			if (!isNaN(codeAsNumber)) {
+			if (!Number.isNaN(codeAsNumber)) {
 				localStorage.removeItem('schedule.data');
 				setCode(codeAsNumber);
 			} else {
