@@ -15,19 +15,19 @@ import useLocalStorage from '../utils/localStorage'
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Settings = () => {
-    const [code, setCode] = useLocalStorage("schedule.adeCode", 8379);
+	const [code, setCode] = useLocalStorage("schedule.adeCode", 8379);
 
-    const [notifications, setNotifications] = useState(false)
-    const [groupFilter, setGroupFilter] = useState(true)
+	const [notifications, setNotifications] = useState(false)
+	const [groupFilter, setGroupFilter] = useState(true)
 
-    const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_ECRANS_CONNECTES_URL || 'https://iut-ptut.alwaysdata.net/wp-json/amu-ecran-connectee'}/v1/ade`, fetcher)
+	const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_ECRANS_CONNECTES_URL || 'https://ptut-2-tv-connectees.alwaysdata.net/wp-json/amu-ecran-connectee'}/v1/ade`, fetcher)
 
-	const onCodeChange = (newCode: number) => {
-		console.log('ADE code changed to', newCode)
+	// eslint-disable-next-line no-shadow
+	const onCodeChange = (code: any) => {
+		console.log('ADE code changed to', code)
 		localStorage.removeItem('schedule.data')
-		setCode(newCode)
+		setCode(code)
 	}
-
 
 	return (
 		<Page title='Paramètres' subtitle={<p className="text-sm dark:text-gray-200">Ces paramètres seront enregistrés sur votre appareil.</p>}>
@@ -57,7 +57,8 @@ const Settings = () => {
 						{data && (<>
 							<select onChange={e => onCodeChange(parseInt(e.target.value, 10))} className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none dark:text-gray-100 dark:bg-purple-700 dark:border-transparent focus:outline-none focus:ring focus:border-blue-300" placeholder="Emploi du temps à sélectionner" defaultValue={code}>
 								{data.filter(({ type }) => groupFilter === true || type === groupFilter)
-									.map(({ newCode, title }) => <option key={newCode} value={newCode}>{title}</option>)}
+									// eslint-disable-next-line no-shadow,react/no-array-index-key
+									.map(({ code, title }, i: number) => <option key={i} value={code}>{title}</option>)}
 							</select>
 							<div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
 								<svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
