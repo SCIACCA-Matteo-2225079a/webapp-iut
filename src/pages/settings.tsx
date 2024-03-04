@@ -61,7 +61,7 @@ const Settings = () => {
 
                     <div className="relative inline-block w-full mt-4 text-gray-700">
                         {data && (<>
-                            <select onChange={e => onCodeChange(parseInt(e.target.value, 10))} className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none dark:text-gray-100 dark:bg-purple-700 dark:border-transparent focus:outline-none focus:ring focus:border-blue-300" placeholder="Emploi du temps à sélectionner" defaultValue={code}>
+                            <select onChange={e => onCodeChange(e.target.value)} className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none dark:text-gray-100 dark:bg-purple-700 dark:border-transparent focus:outline-none focus:ring focus:border-blue-300" placeholder="Emploi du temps à sélectionner" defaultValue={code}>
 															{Array.isArray(data) && data.filter(({ type }) => groupFilter === true || type === groupFilter)
 																.map(({ newCode, title }) => <option key={newCode} value={newCode}>{title}</option>)}
 														</select>
