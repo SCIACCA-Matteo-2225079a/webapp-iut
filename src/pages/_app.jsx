@@ -6,9 +6,9 @@ import '../styles/global.css';
 const App = ({ Component, pageProps }) => {
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
-			window.OneSignalDeferred = window.OneSignalDeferred || [];
-			OneSignalDeferred.push(function(OneSignal) {
-				OneSignal.init({
+			window.OneSignal = window.OneSignal || [];
+			window.OneSignal.push(function func() {
+				window.OneSignal.init({
 					appId: "0a2f9a03-ae7e-4744-9901-09a0ac1f12f2",
 					safari_web_id: "web.onesignal.auto.0a17e090-f65a-43cf-871a-056959ed633a",
 					notifyButton: {
@@ -46,8 +46,7 @@ const App = ({ Component, pageProps }) => {
 				<link rel='apple-touch-icon' href='/images/maskable_icon_x192.png' />
 				<link rel='icon' type='image/png' href='/favicon.png' />
 				<link rel='manifest' href='/manifest.json' />
-
-				<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+				<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer/>
 			</Head>
 
 			<Component {...pageProps} />
