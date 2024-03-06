@@ -1,25 +1,21 @@
 import Head from 'next/head';
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import OneSignal from 'react-onesignal';
 import { OnlineStatusProvider } from "../utils/online";
 import '../styles/global.css';
 
+async function runOneSignal() {
+	await OneSignal.init({appId: "0a2f9a03-ae7e-4744-9901-09a0ac1f12f2", safari_web_id: "web.onesignal.auto.0a17e090-f65a-43cf-871a-056959ed633a", notifyButton: {
+			enable: true,
+		},});
+	OneSignal.Slidedown.promptPush();
+}
+
 const App = ({ Component, pageProps }) => {
-	/* useEffect(() => {
-		if (typeof window !== 'undefined') {
-			window.OneSignal = window.OneSignal || [];
-			window.OneSignal.push(function func() {
-				window.OneSignal.init({
-					appId: "0a2f9a03-ae7e-4744-9901-09a0ac1f12f2",
-					safari_web_id: "web.onesignal.auto.0a17e090-f65a-43cf-871a-056959ed633a",
-					notifyButton: {
-						enable: true,
-					},
-				});
-			});
-		}
-	}, []); */
+	useEffect(() => {
+		runOneSignal();
+	});
 
 	return (
 		<OnlineStatusProvider>
@@ -49,18 +45,6 @@ const App = ({ Component, pageProps }) => {
 				<link rel='icon' type='image/png' href='/favicon.png' />
 				<link rel='manifest' href='/manifest.json' />
 				<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer/>
-				<script>
-					window.OneSignalDeferred = window.OneSignalDeferred || [];
-					OneSignalDeferred.push(function(OneSignal) {
-					OneSignal.init({
-						appId: "0a2f9a03-ae7e-4744-9901-09a0ac1f12f2",
-						safari_web_id: "web.onesignal.auto.0a17e090-f65a-43cf-871a-056959ed633a",
-						notifyButton: {
-							enable: true,
-						},
-					})
-				});
-				</script>
 			</Head>
 
 			<Component {...pageProps} />
