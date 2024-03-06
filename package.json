@@ -29,6 +29,7 @@
     "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.2",
     "react-feather": "^2.0.9",
+    "react-onesignal": "^3.0.1",
     "sharp": "^0.29.3",
     "swr": "^1.0.1",
     "tailwindcss": "^2.2.19",
